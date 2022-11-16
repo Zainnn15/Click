@@ -81,7 +81,7 @@ const Navbar = () => {
                 <MenuItem>SIGN IN</MenuItem>
                 <MenuItem> 
                 <Badge badgeContent={0} color="primary">
-                    <ShoppingCartOutlined/>
+                    <a style={{textDecoration: 'none'}} href='./Cart'><ShoppingCartOutlined/></a>
                 </Badge>
                 </MenuItem>
 
