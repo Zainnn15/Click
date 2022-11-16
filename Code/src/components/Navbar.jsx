@@ -36,6 +36,7 @@ const Wrapper = styled.div`
         const Input = styled.input`
         border:none
         `;
+
         const Center = styled.div`
         flex: 1;
         text-align: center;
@@ -56,7 +57,8 @@ const Wrapper = styled.div`
         font-size: 14px;
         cursor: pointer;
         margin-left: 25px;
-        `
+        `;
+
 const Navbar = () => {
   return (
     <Container> 
@@ -70,13 +72,14 @@ const Navbar = () => {
                <Search style={{color:"gray", fontSize:16}}/>
             </SearchContainer>
         </Left>
-        <Center><Logo> RUPINS INC. </Logo> </Center>
+        <Center> 
+            <Logo> 
+                <a style={{textDecoration: 'none '}}  href  = "./">CLICK </a> </Logo> </Center>
         <Right>  
-
-                <MenuItem>PRODUCTS</MenuItem>
+                <MenuItem> <a style={{textDecoration: 'none'}} href = "./Products">PRODUCTS</a></MenuItem>
                 <MenuItem>DEALS</MenuItem>
                 <MenuItem>SIGN IN</MenuItem>
-                <MenuItem>
+                <MenuItem> 
                 <Badge badgeContent={0} color="primary">
                     <ShoppingCartOutlined/>
                 </Badge>
