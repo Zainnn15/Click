@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "vidly_jwtPrivateKey=123123",
+  "db": "mongodb://burr:zain123@ac-rgi7a2r-shard-00-00.ojxlzbo.mongodb.net:27017,ac-rgi7a2r-shard-00-01.ojxlzbo.mongodb.net:27017,ac-rgi7a2r-shard-00-02.ojxlzbo.mongodb.net:27017/?ssl=true&replicaSet=atlas-xi1eyd-shard-0&authSource=admin&retryWrites=true&w=majority"
+}
