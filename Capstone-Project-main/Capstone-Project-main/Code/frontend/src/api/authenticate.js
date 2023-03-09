@@ -15,9 +15,24 @@ const extendedApi = api.injectEndpoints({
                 method:"POST",
                 body
             })
-        })
+        }),
+        forgotPassword:build.mutation({
+            query:(body)=>({
+                url:"/auth/forgot-password",
+                method:"POST",
+                body
+            })
+        }),
+        resetPassword:build.mutation({
+            query:(body)=>({
+                url:"/auth/reset-password",
+                method:"POST",
+                body
+            })
+        }),
+
     }),
     overrideExisting: false,
 })
 
-export const { useGetRegisteredMutation, useSignInMutation } = extendedApi
+export const { useGetRegisteredMutation, useSignInMutation, useForgotPasswordMutation, useResetPasswordMutation } = extendedApi

@@ -67,7 +67,7 @@ const Register = () => {
     getRegister(userData).then((res) => {
       if (res.error) return swal("Info!", res.error.data, "warning");
 
-      swal("Info!","Registered Successfully", "success").then(() => {
+      swal("Info!", "Registered Successfully", "success").then(() => {
         navigate("/signin");
       });
     });
@@ -101,9 +101,10 @@ const Register = () => {
               setUserData({ ...userData, email: e.target.value })
             }
           />
-          <Input placeholder="password" />
+          <Input placeholder="password" type="password" />
           <Input
             placeholder="confirm password"
+            type="password"
             onChange={(e) =>
               setUserData({ ...userData, password: e.target.value })
             }

@@ -12,6 +12,9 @@ module.exports = function () {
   console.log("db >>>>>>", db);
   mongoose
     .connect(db, configuration)
-    .then(() => winston.info(`Connected to ${db}...`))
+    .then(() => {
+      winston.info(`Connected to ${db}...`)
+      console.log(`Connected to ${db}...`)
+    })
     .catch((err) => winston.info(`major Error: ${err}`));
 };

@@ -81,12 +81,15 @@ const SignIn = () => {
           ></Input>
           <Input
             placeholder="Password"
+            type="password"
             onChange={(e) =>
               setUserData({ ...userData, password: e.target.value })
             }
           ></Input>
           <Button onClick={handleSignIn}>LOGIN</Button>
-          <Link>FOTGOT PASSWORD?</Link>
+          <Link>
+            <a href="/forgot-password">
+              FORGOT PASSWORD?</a></Link>
           <Link>
             <a href="./register">CREATE A NEW ACCOUNT</a>
           </Link>

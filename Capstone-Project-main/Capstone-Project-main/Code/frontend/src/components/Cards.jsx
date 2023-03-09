@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-import { IconButton, Box, Typography } from "@material-ui/core";
+import { IconButton, Box, Typography, Snackbar, Slide } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -45,11 +45,16 @@ export default function RecipeReviewCard({ item, hasDiscount }) {
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  console.log(user);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   const handleAddToCart = (item) => {
+    
     dispatch(
       addToCart({
         ...item,
@@ -60,56 +65,57 @@ export default function RecipeReviewCard({ item, hasDiscount }) {
     );
   };
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image={item.img}
-        title="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="h4" color="textSecondary" component="p">
-          {item.title}
-        </Typography>
-        <Box display="flex" alignItems={"baseline"}>
-          <Typography variant="h5" color="textSecondary" component="p">
-            ${" "}
-            {hasDiscount
-              ? (item.price * (100 - item.discount)) / 100
-              : item.price}
+    <>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          image={item.img}
+          title="Paella dish"
+        />
+        <CardContent>
+          <Typography variant="h4" color="textSecondary" component="p">
+            {item.title}
           </Typography>
-          {hasDiscount && (
-            <Typography
-              variant="body1"
-              color="textSecondary"
-              component="p"
-              style={{ textDecoration: "line-through", marginLeft: 10 }}
-            >
-              ${item.price}
+          <Box display="flex" alignItems={"baseline"}>
+            <Typography variant="h5" color="textSecondary" component="p">
+              ${" "}
+              {hasDiscount
+                ? (item.price * (100 - item.discount)) / 100
+                : item.price}
             </Typography>
-          )}
-        </Box>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          aria-label="add to shopping cart"
-          onClick={() => handleAddToCart(item)}
-        >
-          <ShoppingCartOutlined />
-        </IconButton>
-        <IconButton
-          aria-label="share"
-          onClick={() =>
-            navigate(
-              `/Products/${item._id} ${hasDiscount ? "?discount=true" : ""}`
-            )
-          }
-        >
-          <SearchOutlined />
-        </IconButton>
-        <IconButton aria-label="share">
-          <FavoriteBorderOutlined />
-        </IconButton>
-        {/* <IconButton
+            {hasDiscount && (
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                component="p"
+                style={{ textDecoration: "line-through", marginLeft: 10 }}
+              >
+                ${item.price}
+              </Typography>
+            )}
+          </Box>
+        </CardContent>
+        <CardActions disableSpacing>
+          <IconButton
+            aria-label="add to shopping cart"
+            onClick={() => handleAddToCart(item)}
+          >
+            <ShoppingCartOutlined />
+          </IconButton>
+          <IconButton
+            aria-label="share"
+            onClick={() =>
+              navigate(
+                `/Products/${item._id} ${hasDiscount ? "?discount=true" : ""}`
+              )
+            }
+          >
+            <SearchOutlined />
+          </IconButton>
+          <IconButton aria-label="share">
+            <FavoriteBorderOutlined />
+          </IconButton>
+          {/* <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
           })}
@@ -119,7 +125,9 @@ export default function RecipeReviewCard({ item, hasDiscount }) {
         >
           <ExpandMoreIcon />
         </IconButton> */}
-      </CardActions>
-    </Card>
+        </CardActions>
+      </Card>
+    </>
+
   );
 }
