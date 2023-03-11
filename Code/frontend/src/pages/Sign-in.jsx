@@ -80,8 +80,8 @@ const SignIn = () => {
             }
           ></Input>
           <Input
-            type='password'
             placeholder="Password"
+            type="password"
             onChange={(e) =>
               setUserData({ ...userData, password: e.target.value })
             }

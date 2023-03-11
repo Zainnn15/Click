@@ -35,7 +35,7 @@ router.post("/forgot-password", async (req, res) => {
 
   user.resetToken = chance.guid();
   await user.save();
-  let link = `${process.env.APP_URL || 'http://localhost:3006'}/reset-password?email=${user.email}&token=${user.resetToken}`
+  let link = `${process.env.APP_URL || 'http://localhost:3001'}/reset-password?email=${user.email}&token=${user.resetToken}`
   sendEmailForgotPassword(user.email, user.firstName, link, "Click: Forgot password?", (message) => {
     res.send({
       message: `Password reset link is sent to your email address`

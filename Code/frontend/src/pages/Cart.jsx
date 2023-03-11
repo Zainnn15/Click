@@ -5,6 +5,7 @@ import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   decrementQuantity,
   incrementQuantity,
@@ -172,6 +173,8 @@ const Cart = () => {
   const handleCheckout = () => {
     const token = localStorage.getItem("token");
     if (token === "" || token === null) navigate("/signin");
+
+    navigate("/Checkout")
   };
 
   return (
@@ -186,7 +189,7 @@ const Cart = () => {
             <TopText>Shopping Bag ({products.length})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type="filled">Checkout</TopButton>
+          <TopButton type="filled" onClick={handleCheckout}>Checkout</TopButton>
         </Top>
         <Bottom>
           <Grid container spacing={2}>

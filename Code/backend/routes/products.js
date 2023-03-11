@@ -8,7 +8,6 @@ var url = require("url");
 
 router.get("/", async (req, res) => {
   let products = [];
-  console.log("here")
   if (req.query.category === "all")
     products = await Products.find().sort(
       req.query.price === "asc" ? "price" : "-price"

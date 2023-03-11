@@ -3,8 +3,6 @@ const ejs = require("ejs");
 module.exports = {
 
     sendEmailForgotPassword(to, name, link, subject, success, failure) {
-        
-        to = process.env.NODE_ENV == "production" ? to : "Zainnn15.q@gmail.com";
         var transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST || 'smtp.googlemail.com',
             port: process.env.EMAIL_PORT || 465,
