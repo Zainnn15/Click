@@ -1,0 +1,43 @@
+.pagination {
+    display: inline-block;
+}
+
+.pagination li {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    list-style: none;
+}
+
+.pagination li a {
+    text-decoration: none;
+}
+
+.pagination li.active {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.pagination li.active a {
+    color: white;
+}
+
+.pagination li:hover:not(.active):not(.disabled) {
+    background-color: #ddd;
+}
+
+.pagination li.disabled a {
+    color: gray !important;
+    cursor: default;
+}
+
+.badge-danger {
+    background-color: #ff0000;
+    color: white;
+    padding: 3px;
+    border-radius: 9px;
+}
+
+.table-striped tr:nth-child(even) {
+    background-color: #efefef;
+}

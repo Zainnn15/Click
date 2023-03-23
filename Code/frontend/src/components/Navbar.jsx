@@ -67,6 +67,13 @@ const Navbar = () => {
     const data = JSON.parse(localStorage.getItem("user"));
     if (data !== null) setUserName(data.userName);
   }, []);
+
+  const signout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/Home");
+  }
+
   return (
     <Container>
       <Wrapper>
@@ -94,7 +101,7 @@ const Navbar = () => {
             userName && (
               <>
                 <MenuItem onClick={() => navigate("/Orders")}> ORDERS</MenuItem>
-                <MenuItem onClick={() => navigate("/Home")}>SIGN OUT</MenuItem>
+                <MenuItem onClick={signout}>SIGN OUT</MenuItem>
               </>
             )
 

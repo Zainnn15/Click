@@ -70,7 +70,7 @@ export default function RecipeReviewCard({ item, hasDiscount }) {
         <CardMedia
           className={classes.media}
           image={item.img}
-          title="Paella dish"
+          title=""
         />
         <CardContent>
           <Typography variant="h4" color="textSecondary" component="p">

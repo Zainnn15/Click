@@ -35,7 +35,8 @@ const userSchema = new mongoose.Schema({
   },
   resetToken: {
     type: String
-  }
+  },
+  admin: Boolean
 });
 
 userSchema.methods.generateAuthToken = function() { 

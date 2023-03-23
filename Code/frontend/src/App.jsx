@@ -13,6 +13,8 @@ import ResetPassword from "./pages/ResetPassword";
 import CheckOutPage from "./pages/CheckOutPage";
 import OrdersPage from "./pages/OrderPage";
 import ProtectedRoute from "./ProtectedRoute";
+import AdminProducts from "./components/Admin/Products";
+import AdminLayout from "./components/Admin/Layout";
 
 const App = () => {
   return (
@@ -27,7 +29,14 @@ const App = () => {
         <Route exact path="/Deals" element={<ProductList />} />
         <Route exact path="/Checkout" element={
           <ProtectedRoute>
-            <CheckOutPage />
+            <CheckOutPage checkCart={true} />
+          </ProtectedRoute>
+        } />
+        <Route exact path="/Admin/Products" element={
+          <ProtectedRoute>
+            <AdminLayout admin={true}>
+              <AdminProducts />
+            </AdminLayout>
           </ProtectedRoute>
         } />
         <Route exact path="/signin" element={<SignIn />} />

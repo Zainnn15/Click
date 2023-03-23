@@ -7,8 +7,21 @@ router.get("/user/:user", async (req, res) => {
   let query = {
     user: req.params.user
   };
-  let orders = await Orders.find(query);
-  res.send(orders);
+
+  let perPage = 10
+    , page = (req.query.page || 1)
+
+  let count = await Orders.count(query);
+
+  let orders = await Orders.find(query).limit(perPage)
+    .skip(perPage * (+page - 1))
+  res.send({
+    orders,
+    page,
+    pages: Math.ceil(count / perPage),
+    perPage,
+    total: count
+  });
 });
 
 router.post("/", async (req, res) => {

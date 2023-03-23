@@ -23,6 +23,40 @@ const CreditCards = (props) => {
   const [cvc, setCvc] = useState("");
   const [focus, setFocus] = useState("");
 
+  // Define initial state for form field errors
+  const [formErrors, setFormErrors] = useState({
+    number: false,
+    name: false,
+    expiry: false,
+    cvc: false,
+  });
+
+  // Handle changes to form fields
+  const handleFormChange = (event) => {
+    // Clear error message when user starts typing
+    setFormErrors({
+      ...formErrors,
+      [event.target.name]: false,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Check for required fields
+    let errors = {
+      number: !number,
+      name: !name,
+      expiry: !expiry,
+      cvc: !cvc
+    };    
+    setFormErrors(errors);
+    // Submit form if no errors
+    if (Object.values(errors).every((value) => !value)) {
+      props.onCardSubmit({ number, name, expiry, cvc });
+    }
+  };
+
   return (
     <Grid container spacing={1} justify="center" direction="column">
       <Grid item>
@@ -41,9 +75,11 @@ const CreditCards = (props) => {
           label="Card Number"
           variant="outlined"
           fullWidth
-          onChange={(e) => setNumber(e.target.value)}
+          onChange={(e) => { setNumber(e.target.value); handleFormChange(e) }}
           onFocus={(e) => setFocus(e.target.name)}
           name="number"
+          error={formErrors.number}
+          helperText={formErrors.number ? 'This field is required' : ''}
         />
       </Grid>
 
@@ -52,9 +88,11 @@ const CreditCards = (props) => {
           label="Cardholder Name"
           variant="outlined"
           fullWidth
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => { setName(e.target.value); handleFormChange(e) }}
           onFocus={(e) => setFocus(e.target.name)}
           name="name"
+          error={formErrors.name}
+          helperText={formErrors.name ? 'This field is required' : ''}
         />
       </Grid>
 
@@ -63,9 +101,11 @@ const CreditCards = (props) => {
           label="Expiry Date"
           variant="outlined"
           fullWidth
-          onChange={(e) => setExpiry(e.target.value)}
+          onChange={(e) => { setExpiry(e.target.value); handleFormChange(e) }}
           onFocus={(e) => setFocus(e.target.name)}
           name="expiry"
+          error={formErrors.expiry}
+          helperText={formErrors.expiry ? 'This field is required' : ''}
         />
       </Grid>
 
@@ -74,15 +114,17 @@ const CreditCards = (props) => {
           label="CVC"
           variant="outlined"
           fullWidth
-          onChange={(e) => setCvc(e.target.value)}
+          onChange={(e) => { setCvc(e.target.value); handleFormChange(e) }}
           onFocus={(e) => setFocus(e.target.name)}
           name="cvc"
+          error={formErrors.cvc}
+          helperText={formErrors.cvc ? 'This field is required' : ''}
         />
       </Grid>
 
       <Grid container spacing={1} justify="center" direction="column">
         <Grid item>
-          <TopButton type='filled' variant="contained" color="primary" onClick={() => props.onCardSubmit({ cvc, expiry, name, number })}>
+          <TopButton type='filled' variant="contained" color="primary" onClick={handleSubmit}>
             Pay Now
           </TopButton>
           &nbsp;

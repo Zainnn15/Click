@@ -8,6 +8,9 @@ import Navbar from '../components/Navbar';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import { useGetOrdersByUserMutation } from '../api/orders';
 
+import Pagination from 'react-js-pagination';
+import '../components/pagination.css';
+
 const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
@@ -43,11 +46,17 @@ const OrdersPage = () => {
     const user = JSON.parse(localStorage.getItem("user"))
 
     useEffect(() => {
-        getOrders(user._id).then((res) => {
+        getOrders({ userId: user._id }).then((res) => {
             console.log(res, "asdfasdfa");
             setOrders(res.data)
         })
     }, []);
+
+    const handlePageChange = (e) => {
+        getOrders({ userId: user._id, page: e }).then((res) => {
+            setOrders(res.data)
+        })
+    }
 
 
 
@@ -72,7 +81,7 @@ const OrdersPage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {orders && orders.map((row) => (
+                                {orders && orders.orders && orders.orders.map((row) => (
                                     <TableRow key={row._id}>
                                         <TableCell>{row._id}</TableCell>
                                         <TableCell>
@@ -90,6 +99,14 @@ const OrdersPage = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
+
+                    <Pagination
+                        activePage={+orders?.page || 1}
+                        itemsCountPerPage={+orders?.perPage || 10}
+                        totalItemsCount={orders?.total || 0}
+                        pageRangeDisplayed={5}
+                        onChange={handlePageChange}
+                    />
                 </Container>
             </Container >
         </>

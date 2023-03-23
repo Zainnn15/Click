@@ -5,14 +5,41 @@ const extendedApi = api.injectEndpoints({
     getProducts: build.mutation({
       query: (query) => `/products${query}`,
     }),
-    getSingleProduct:build.mutation({
+    getSingleProduct: build.mutation({
       query: (id) => `/products/${id}`,
     }),
     getProductsByCategory: build.query({
       query: (category) => `/products/category/${category}`,
     }),
+    addProduct: build.mutation({
+      query: (body) => ({
+        url: `/products`,
+        method: "POST",
+        body: body
+      }),
+    }),
+    updateProduct: build.mutation({
+      query: (body) => ({
+        url: `/products/${body._id}`,
+        method: "PUT",
+        body: body
+      }),
+    }),
+    deleteProduct: build.mutation({
+      query: (id) => ({
+        url: `/products/${id}`,
+        method: "DELETE"
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetProductsMutation, useGetProductsByCategoryQuery, useGetSingleProductMutation } = extendedApi;
+export const {
+  useGetProductsMutation,
+  useGetProductsByCategoryQuery,
+  useGetSingleProductMutation,
+  useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation
+} = extendedApi;

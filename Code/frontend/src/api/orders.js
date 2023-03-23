@@ -10,7 +10,7 @@ const extendedApi = api.injectEndpoints({
             }),
         }),
         getOrdersByUser: build.mutation({
-            query: (userId) => `/orders/user/${userId}`
+            query: (data) => `/orders/user/${data.userId}?page=${(data.page || 1)}`
         }),
     }),
     overrideExisting: false,

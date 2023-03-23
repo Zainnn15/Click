@@ -20,12 +20,33 @@ router.get("/", async (req, res) => {
   res.send(products);
 });
 
+router.get("/admin/list", async (req, res) => {
+
+  let query = {};
+  let perPage = 10
+    , page = (req.query.page || 1)
+
+  let count = await Products.count(query);
+
+  let products = await Products.find(query).limit(perPage)
+    .skip(perPage * (+page-1))
+  res.send({
+    products,
+    page,
+    pages: Math.ceil(count / perPage),
+    perPage,
+    total: count
+  });
+});
+
 router.get("/discount", async (req, res) => {
   const products = await Products.find().sort("title");
   res.send(products);
 });
 
 router.post("/", async (req, res) => {
+  console.log(req.body)
+  delete req.body._id;
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -41,7 +62,7 @@ router.put("/:id", async (req, res) => {
 
   const product = await Products.findByIdAndUpdate(
     req.params.id,
-    { img: req.body.title, title: req.body.title, description: req.body.title },
+    req.body,
     {
       new: true,
     }
