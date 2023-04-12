@@ -15,6 +15,7 @@ import {
   ShoppingCartOutlined,
 } from "@material-ui/icons";
 import { addToCart } from "../store/cart";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,15 +55,18 @@ export default function RecipeReviewCard({ item, hasDiscount }) {
   };
 
   const handleAddToCart = (item) => {
-    
-    dispatch(
-      addToCart({
-        ...item,
-        price: hasDiscount
-          ? (item.price * (100 - item.discount)) / 100
-          : item.price,
-      })
-    );
+    if (item.currentQuantity > 0) {
+      dispatch(
+        addToCart({
+          ...item,
+          price: hasDiscount
+            ? (item.price * (100 - item.discount)) / 100
+            : item.price,
+        })
+      );
+    } else {
+      swal({ title: 'Out of stock!', icon: 'error' })
+    }
   };
   return (
     <>
@@ -70,7 +74,7 @@ export default function RecipeReviewCard({ item, hasDiscount }) {
         <CardMedia
           className={classes.media}
           image={item.img}
-          title=""
+          title="Paella dish"
         />
         <CardContent>
           <Typography variant="h4" color="textSecondary" component="p">

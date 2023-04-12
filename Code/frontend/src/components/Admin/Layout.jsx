@@ -13,7 +13,8 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import PeopleIcon from "@material-ui/icons/People";
+import HomeIcon from "@material-ui/icons/Home";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -55,6 +56,8 @@ function AdminLayout({ children }) {
         setDrawerOpen(false);
     };
 
+    const navigate = useNavigate();
+
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -85,6 +88,12 @@ function AdminLayout({ children }) {
                 <Toolbar />
                 <div className={classes.drawerContainer}>
                     <List>
+                        <ListItem button onClick={() => navigate("/")}>
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Home" />
+                        </ListItem>
                         <ListItem button>
                             <ListItemIcon>
                                 <DashboardIcon />

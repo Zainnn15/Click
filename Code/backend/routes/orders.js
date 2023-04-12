@@ -1,4 +1,5 @@
 const { Orders } = require("../models/orders");
+const { Products } = require("../models/products");
 const express = require("express");
 const router = express.Router();
 
@@ -29,6 +30,15 @@ router.post("/", async (req, res) => {
   try {
     let order = new Orders(req.body);
     order = await order.save();
+
+    req.body.items.forEach(async item => {
+      let p = await Products.findById(item._id);
+      console.log(p, "prod");
+      if(p) {
+        p.currentQuantity -= item.quantity;
+        await p.save();
+      }
+    })
 
     res.send(order);
   } catch (err) {

@@ -93,7 +93,7 @@ const Navbar = () => {
         <Right>
           <MenuItem onClick={() => navigate("/Products")}> PRODUCTS</MenuItem>
           <MenuItem onClick={() => navigate("/Deals")}> DEALS</MenuItem>
-          {userName ? <MenuItem onClick={() => navigate("/")}>{userName}</MenuItem>
+          {userName ? <MenuItem onClick={() => navigate("/Admin/Products")}>{userName}</MenuItem>
             :
             <MenuItem onClick={() => navigate("/signin")}>SIGN IN</MenuItem>
           }
