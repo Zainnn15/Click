@@ -220,7 +220,7 @@ const Cart = () => {
                             <ProductAmountContainer>
                               <button
                                 onClick={() =>
-                                  dispatch(incrementQuantity(foodlist._id))
+                                  dispatch(incrementQuantity(foodlist))
                                 }
                               >
                                 <Add />

@@ -1,5 +1,6 @@
 // src/redux/cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+import swal from "sweetalert";
 
 let cartInLocalStorage = localStorage.getItem("cart");
 const cartSlice = createSlice({
@@ -13,7 +14,14 @@ const cartSlice = createSlice({
         (item) => item._id === action.payload._id
       );
       if (itemInCart) {
-        itemInCart.quantity++;
+        if((action.payload.currentQuantity) > (itemInCart.quantity)) {
+          itemInCart.quantity++;
+        } else {
+          swal({
+            title: `Maximum allowed quantity reached`,
+            icon: 'error'
+          })
+        }
       } else {
         state.cart.push({
           ...action.payload,
@@ -25,8 +33,15 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
     incrementQuantity: (state, action) => {
-      const item = state.cart.find((item) => item._id === action.payload);
-      item.quantity++;
+      const item = state.cart.find((item) => item._id === action.payload._id);
+      if((action.payload.currentQuantity) > (item.quantity)) {
+        item.quantity++;
+      } else {
+        swal({
+          title: `Maximum allowed quantity reached`,
+          icon: 'error'
+        })
+      }
       localStorage.setItem("cart", JSON.stringify(state));
     },
     decrementQuantity: (state, action) => {

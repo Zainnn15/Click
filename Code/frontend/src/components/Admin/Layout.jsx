@@ -16,6 +16,7 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import HomeIcon from "@material-ui/icons/Home";
 import { useNavigate } from "react-router-dom";
 
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +95,7 @@ function AdminLayout({ children }) {
                             </ListItemIcon>
                             <ListItemText primary="Home" />
                         </ListItem>
-                        <ListItem button>
+                        <ListItem button onClick={() => navigate("/Products")}>
                             <ListItemIcon>
                                 <DashboardIcon />
                             </ListItemIcon>
